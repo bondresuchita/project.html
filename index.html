@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Shuffling</title>
+     <h1><center>Room Shuffling Data</center></h1>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: pink;
+            align-items:center;
+        }
+        table, th, td { 
+            border: 1px solid black;
+        }
+        td, th {
+            padding: 6px;
+            text-align: center;
+        }
+        td:hover{
+            background-color: lightgreen;
+        }
+        th{
+            background-color: rgb(253, 9, 111);
+        }
+    </style>
+</head>
+<body>
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>Room No</th>
+                <th>Student 1  Bed   A</th>
+                <th>Student 2  Bed   B</th>
+                <th>Student 3  Bed   C</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be added here via JS -->
+        </tbody>
+    </table>
+    <br>
+    <center>
+    <button onclick="refreshList()">Shuffle</button>
+    <style>
+        button {
+            border-collapse: collapse;
+            width: 20%;
+            background-color:aqua;
+            
+        }
+        button{ 
+            border: px solid black;
+        }
+        button{
+            padding: 10px;
+            text-align: center;
+        }
+        button:hover{
+            background-color:rgb(114, 243, 153);
+        }
+    </style>
+    </center>
+
+    <script>
+        const students = [
+        "Sarika kale","Rinkal Bahurupi","Chanda Dod","Sapna Sawai","bhagyashri Sonwane",
+            "Swamini Warghat","Suchita Bondre","Monali Dhole","Manaswi Yekhande",
+            "Snehal Kanhekr","Anuja Raut","Megha Sarve","Sakshi Wadte","Akansha Motghare",
+            "Dipa Raurale","Gayatri Yeole","Manasi Kundalkr","Pooja Sawant","Rupali Nandane",
+            "Komal Bahade","Kanchan Shende","Nandini Dawre","Vaishnavi Bahale","Mohini Ramteke",
+            "Lina Barve","Punam Chaudhary","Akansha Monde","Pragati Dhule","Amruta Suralkar",
+            "Nikita Hingmire","Anuradha Aswar","Anuradha Morey","Rupali Rewatkar",
+            "Manasi Panchbudhe","Jyoti Bhasme","Pranita Dhakate","Khushi Kacchwah",
+            "Vaishnavi Bhamburkar","Samiksha Khadke","Sneha Sawai","Vishakha Wankhede",
+            "sabha Sheikh","Sarika Shende","Anjali Nanhe","Ashwini Khadse"
+        ];
+
+        function populateTable() {
+            let tableBody = document.querySelector("#studentTable tbody");
+            tableBody.innerHTML = "";
+
+            for (let i = 0; i < students.length; i += 3) {
+                let row = tableBody.insertRow();
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+                
+                cell1.innerHTML = (i / 3) + 1; // Room number
+                cell2.innerHTML = students[i];
+                cell3.innerHTML = students[i + 1] || ''; // These checks ensure that even if the total student count is not a multiple of 3, it won't throw an error.
+                cell4.innerHTML = students[i + 2] || '';
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // swap elements
+            }
+        }
+
+        function refreshList() {
+            shuffleArray(students);
+            populateTable();
+        }
+
+        // Initial population of the table
+        populateTable();
+    </script>
+</body>
+</html>
